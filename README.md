@@ -27,6 +27,18 @@ Plus `workflows/handoff-contract.md` (the receipt/gate schema every delivery
 shares), two namespaced Codex agents (`autota_technical_artist`,
 `autota_art_scout`), and one disabled-by-default project profile.
 
+An opt-in [Tripo API adapter](scripts/tripo-adapter.md) provides credential-file
+balance probes, explicit paid submissions and resumable task queries. Generated
+models still pass through autoTA's Blender and target-engine checks; quad and
+face-count request flags are not acceptance guarantees. P2 is the fork's Tripo
+default; users choose sourcing, direct Blender modeling or a hosted route unless
+they delegate that decision.
+
+[Tripo Studio web](skills/auto-ta/references/runtime-routing.md#tripo-studio-web-manual-transfer-handoff)
+is also supported: text-to-model, Smart Mesh, quads and 2K textures by default,
+then manual download or user-operated Send to Blender/Bridge. Local inspection
+resumes after transfer; this route includes a human handoff.
+
 The initial Skill sources were migrated from
 `qiulinfan/qiulinfan.github.io` revision
 `0e4cce8a474197170942e9b10984706bb9b95a05`. The deterministic raster core of
@@ -49,6 +61,16 @@ only the mature TA pipeline remains.
    mutates the game project's scenes on its own authority.
 
 ## Link the working tree into Codex
+
+After deployment, the first asset conversation asks once about the user's
+standards unless they are already supplied or saved. This fork defaults to
+editable quads with useful corner triangles, a few hundred–1000 polygons for
+small props and around 2000 for large props, with ±20% tolerance and default
+2048 x 2048 textures. Importance,
+viewing distance and defect severity select keep, local repair or optional
+reconstruction. See [asset standards](skills/auto-ta/references/asset-standards.md)
+and the [reconstruction helper](skills/auto-ta/references/mesh-reconstruction.md).
+Accepted standards are reused; explicit per-asset instructions override them.
 
 The linkers point Codex directly at this checkout. Editing a Skill or custom
 agent here therefore changes what a newly started Codex task loads; no copied
@@ -150,6 +172,11 @@ Profiles can narrow paths and delivery adapters. They cannot expand user
 authority or weaken validation, licensing, or workspace boundaries.
 
 ## Validate
+
+The optional reconstruction helper has real Blender tests (no provider calls):
+set `AUTOTA_TEST_BLENDER` to the installed Blender executable and run
+`python -m unittest discover -s tests -p 'test_reconstruction*.py' -v`.
+Without that variable, DCC integration tests skip while policy tests still run.
 
 On macOS, open iTerm2 and run the complete POSIX validation path in `zsh` or
 `bash`. Linux uses the same commands:
