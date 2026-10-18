@@ -20,7 +20,7 @@ Rules for working in this repository:
 - Engine boundary: AutoTA does not mutate a game project's scenes or code on
   its own authority. For Unity-MCP-mutating steps that remain inside kept
   Skills, match the instance by resolved project root before every mutation.
-- Claude Code, OpenCode, and OMP boundary: integration is skills-only via
+- Claude Code, OMP, and dsh boundary: integration is skills-only via
   `scripts/link-skills.sh RUNTIME` / `.ps1 -Runtime RUNTIME`, deliberately independent of
   `workflow.bundle.toml` and the receipt-backed Codex link contract; those
   scripts install no agents, workflows, profiles, or receipts. The existing

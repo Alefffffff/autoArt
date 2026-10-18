@@ -8,7 +8,7 @@ import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-RUNTIMES = ("claude", "codex", "opencode", "omp")
+RUNTIMES = ("claude", "codex", "omp", "dsh")
 
 
 def powershell_ready():
@@ -36,10 +36,9 @@ class SkillLinkingTests(unittest.TestCase):
         self.skill(repo / "skills/alpha")
         self.skill(repo / "skills/zeta")
         homes = {runtime: base / "homes" / runtime for runtime in RUNTIMES}
-        homes["opencode"] = base / "config home" / "opencode"
         env = dict(os.environ, CLAUDE_CONFIG_DIR=str(homes["claude"]),
                    CODEX_HOME=str(homes["codex"]),
-                   XDG_CONFIG_HOME=str(homes["opencode"].parent),
+                   DSH_HOME=str(homes["dsh"]),
                    PI_CODING_AGENT_DIR=str(homes["omp"]))
         return repo, homes, env
 

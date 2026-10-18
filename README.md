@@ -203,9 +203,9 @@ safely and preserve it for manual inspection. The lifecycle does not promise
 automatic stale cleanup for that fallback. Enable Windows Developer Mode so
 agent symlinks can be used when rename/delete cleanup must remain automatic.
 
-Claude Code, OpenCode, and OMP integration is skills-only. Run
-`scripts/link-skills.sh claude`, `opencode`, or `omp` on POSIX/WSL, or
-`scripts/link-skills.ps1 -Runtime claude` / `opencode` / `omp` in PowerShell 7.
+Claude Code, OMP, and DeepSeek Harness (dsh) integration is skills-only. Run
+`scripts/link-skills.sh claude`, `omp`, or `dsh` on POSIX/WSL, or
+`scripts/link-skills.ps1 -Runtime claude` / `omp` / `dsh` in PowerShell 7.
 The existing `link-claude-skills` entry points remain available. The linker
 uses each runtime's native `skills/` directory and preserves foreign entries;
 rerun after pulling or changing the Skill inventory, then start a new session.

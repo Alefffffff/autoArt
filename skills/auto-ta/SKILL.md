@@ -100,8 +100,8 @@ auto_ta_skill_dir=""
 for candidate in \
     "${CODEX_HOME:-$HOME/.codex}/skills/auto-ta" \
     "${CLAUDE_CONFIG_DIR:-$HOME/.claude}/skills/auto-ta" \
-    "${XDG_CONFIG_HOME:-$HOME/.config}/opencode/skills/auto-ta" \
-    "${PI_CODING_AGENT_DIR:-$HOME/.omp/agent}/skills/auto-ta"; do
+    "${PI_CODING_AGENT_DIR:-$HOME/.omp/agent}/skills/auto-ta" \
+    "${DSH_HOME:-$HOME/.dsh}/skills/auto-ta"; do
   if [ -f "$candidate/scripts/blender_asset_audit.py" ]; then
     auto_ta_skill_dir="$(realpath "$candidate")"
     break
@@ -127,17 +127,17 @@ $ClaudeHome = if ([string]::IsNullOrWhiteSpace($env:CLAUDE_CONFIG_DIR)) {
 } else {
   [System.IO.Path]::GetFullPath($env:CLAUDE_CONFIG_DIR)
 }
-$ConfigHome = if ($env:XDG_CONFIG_HOME) { $env:XDG_CONFIG_HOME } else {
-  Join-Path ([Environment]::GetFolderPath('UserProfile')) '.config'
-}
 $OmpHome = if ($env:PI_CODING_AGENT_DIR) { $env:PI_CODING_AGENT_DIR } else {
   Join-Path ([Environment]::GetFolderPath('UserProfile')) '.omp' 'agent'
+}
+$DshHome = if ($env:DSH_HOME) { $env:DSH_HOME } else {
+  Join-Path ([Environment]::GetFolderPath('UserProfile')) '.dsh'
 }
 $AutoTaSkillDir = @(
   (Join-Path $CodexHome 'skills\auto-ta'),
   (Join-Path $ClaudeHome 'skills\auto-ta'),
-  (Join-Path $ConfigHome 'opencode' 'skills/auto-ta'),
-  (Join-Path $OmpHome 'skills/auto-ta')
+  (Join-Path $OmpHome 'skills/auto-ta'),
+  (Join-Path $DshHome 'skills/auto-ta')
 ) | Where-Object { Test-Path -LiteralPath (Join-Path $_ 'scripts\blender_asset_audit.py') } |
   Select-Object -First 1 | ForEach-Object { (Resolve-Path -LiteralPath $_).Path }
 if (-not $AutoTaSkillDir) { throw 'AUTO_TA_SKILL_NOT_LINKED' }
