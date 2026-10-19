@@ -36,6 +36,8 @@ jobs:
           # Git Bash's ln -s copies directories unless native symlinks are requested.
           MSYS: winsymlinks:nativestrict
         run: |
+          # Without this, only the last command's exit code fails the step.
+          $PSNativeCommandUseErrorActionPreference = $true
           python scripts/validate_bundle.py
           python -m unittest discover -s tests -v
           python -m compileall -q skills scripts tests
